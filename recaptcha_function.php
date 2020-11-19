@@ -1,9 +1,9 @@
 <?php 
-	function is_not_Robot() {
+	function is_not_Robot($tokk) {
 		$url = "https://www.google.com/recaptcha/api/siteverify";
 		$data = [
 			'secret' => "6Le6wtgZAAAAAFtxhSDjYoSVVQHMNGTISoS5A7fb",
-			'response' => $_POST['token'],
+			'response' => $tokk,
 			'remoteip' => $_SERVER['REMOTE_ADDR']
 		];
 
@@ -26,12 +26,12 @@
 			//   		<strong>Success!</strong> Your inquiry successfully submitted.
 		 	// 	  </div>';
 		} 
-		// else {
-            // return false;
+		else {
+            return false;
 			// echo '<div class="alert alert-warning">
 			// 		  <strong>Error!</strong> You are not a human.
 			// 	  </div>';
-		// }
+		}
 	}
 
 ?>
