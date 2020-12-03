@@ -34,26 +34,9 @@ if (isset($_POST['submit'])) {
 define('SITE_KEY', '6Le6wtgZAAAAAJNh5Nl8T87zHN81BhuF-6d30XiV');
 define('SECRET_KEY', '6Le6wtgZAAAAAFtxhSDjYoSVVQHMNGTISoS5A7fb');
 
-
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login to my app</title>
-    <script src='https://www.google.com/recaptcha/api.js?render=<?php echo SITE_KEY; ?>'></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="minified/themes/default.min.css" />
-    <script src="minified/sceditor.min.js"></script>
-    <script src="minified/formats/bbcode.js"></script>
-    <!-- <script src="node_modules/ckeditor4/ckeditor.js"></script> -->
-</head>
-<body>
-
-    
-
-    <div class="container" style="margin-top: 100px;">
+include 'nav_menu.php';
+?>  
+    <div class="container" >
         <?php if(isset($_COOKIE['id']) && isset($_COOKIE['sess'])){
             $Controller = new Controller;
             if($Controller -> checkUserStatus($_COOKIE['id'], $_COOKIE['sess'])){
@@ -61,8 +44,8 @@ define('SECRET_KEY', '6Le6wtgZAAAAAFtxhSDjYoSVVQHMNGTISoS5A7fb');
                 echo '<a href="logout.php">Log Out</a>';
             }
             
-        }else{ ?>
-        <img src="img/logo.png" alt="logo" style="max-width: 150px; margin: 0 auto; display: table;" />
+        }else{?>
+
         <form action='' method="POST">
             <div class="form-group">
                 <label for="exampleInputEmail1">Email address</label>
@@ -97,38 +80,35 @@ define('SECRET_KEY', '6Le6wtgZAAAAAFtxhSDjYoSVVQHMNGTISoS5A7fb');
             }, 100000);
         </script>
         <!-- RECAPTCHA -->
-        <h1>SCEditor</h1>
-        <!-- <h1>CKEditor</h1> -->
+        <h1>CKEditor</h1>
         <form action='' method='POST'>
             <div class="form-group">
                 <label for="textarea">Text Area</label>
-                <textarea class="form-control" name="example" id="SCEditor" cols="30" rows="10"></textarea>
+                <textarea class="form-control" name="example" id="SCEditor" cols="30" rows="10">
+                    <?php 
+                    if(isset($_POST['example'])){
+                        // echo ForumCodeToHtml($_POST['example']);
+                        echo $_POST['example'];
+                    }
+                    ?>
+                </textarea>
             </div>
             <button type="submit" name="submit2" class="btn btn-primary">Submit</button>
         </form>
-        <!-- <script>
+        <script>
             CKEDITOR.replace( 'SCEditor',{
                 width: '100%',
-                height: 700
+                height: 700,
             } )
-        </script> -->
-        <script>
-             sceditor.formats.bbcode.set('b', {
-                // tags: {
-                //     sung: null
-                // },
-                // allowsEmpty: false,
-                // isSelfClosing: false,
-                format: '[be]{0}[/be]',
-                html: '<be>{0}</be>',
-                quoteType: sceditor.BBCodeParser.QuoteType.auto
-            });
-            // Replace the textarea #example with SCEditor
-            var textarea = document.getElementById('SCEditor');
-            sceditor.create(textarea, {
-                format: 'bbcode',
-                style: 'minified/themes/content/default.min.css'
-            });
+            CKEDITOR.on('dialogDefinition', function(e){
+                dialogName = e.data.name;
+                dialogDefinition = e.data.definition;
+                console.log(dialogDefinition);//OVAKO MOZEMO DA UHVATIMO IME KOMANDE
+                if(dialogName == 'image'){
+                    // dialogDefinition.removeContents('Link');
+                    // dialogDefinition.removeContents('advanced');
+                }
+            })
         </script>
         <?php } 
         if(isset($_SESSION['access_token'])){
@@ -169,7 +149,7 @@ define('SECRET_KEY', '6Le6wtgZAAAAAFtxhSDjYoSVVQHMNGTISoS5A7fb');
     </div>
     <div>
         <?php if(isset($_POST['example'])){
-            echo $_POST['example'];
+            echo ForumCodeToHtml($_POST['example']);
         } ?>
     </div>
 
