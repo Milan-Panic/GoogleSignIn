@@ -363,7 +363,7 @@
                         l = function(t) {
                             return e.style ? e.style[t] : null
                         };
-                    return g(e, y) ? t : (n = g(e, "width") || l("width"), r = g(e, "height") || l("height"), (e.complete && (n || r) || n && r) && (i = "=" + m.width(e) + "x" + m.height(e)), "[img" + i + "]" + g(e, "src") + "[/img]")
+                    return g(e, y) ? t : (n = g(e, "width") || l("width"), r = g(e, "height") || l("height"), (e.complete && (n || r) || n && r) && (i = "=" + m.width(e) + "x" + m.height(e)), "[img=" + g(e, "src") + "]")
                 },
                 html: function(t, e, n) {
                     var r, i, l, o = "";
