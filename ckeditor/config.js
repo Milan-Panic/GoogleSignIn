@@ -7,7 +7,7 @@ CKEDITOR.editorConfig = function( config ) {
 	// Define changes to default configuration here.
 	// For complete reference see:
 	// https://ckeditor.com/docs/ckeditor4/latest/api/CKEDITOR_config.html
-	config.extraPlugins = ['bbcode','timestamp','abbr']
+	config.extraPlugins = ['bbcode','timestamp','abbr'];
 
 	config.allowedContent = true; //proveriti da li je ovo neophodno
 
@@ -29,7 +29,7 @@ CKEDITOR.editorConfig = function( config ) {
 		{ name: 'about', groups: [ 'about' ] }
 	];
 
-	config.removeButtons = 'Subscript,Superscript,About,Cut,Copy,Paste,PasteText,PasteFromWord,Undo,Redo,Scayt,Unlink,Anchor,SpecialChar,Strike,RemoveFormat,Outdent,Indent,Blockquote';
+	config.removeButtons = 'About,Cut,Copy,Paste,PasteText,PasteFromWord,Undo,Redo,Scayt,Unlink,Anchor,SpecialChar,Strike,RemoveFormat,Outdent,Indent';
 
 	// Remove some buttons provided by the standard plugins, which are
 	// not needed in the Standard(s) toolbar.

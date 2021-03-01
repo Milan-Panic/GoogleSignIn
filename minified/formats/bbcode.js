@@ -38,16 +38,16 @@
                 txtExec: ["[sup]", "[/sup]"]
             },
             left: {
-                txtExec: ["[left]", "[/left]"]
+                txtExec: ["[l]", "[/l]"]
             },
             center: {
-                txtExec: ["[center]", "[/center]"]
+                txtExec: ["[c]", "[/c]"]
             },
             right: {
-                txtExec: ["[right]", "[/right]"]
+                txtExec: ["[r]", "[/r]"]
             },
             justify: {
-                txtExec: ["[justify]", "[/justify]"]
+                txtExec: ["[j]", "[/j]"]
             },
             font: {
                 txtExec: function(t) {
@@ -77,16 +77,16 @@
                 txtExec: function(t, e) {
                     var n = "";
                     s(e.split(/\r?\n/), function() {
-                        n += (n ? "\n" : "") + "[li]" + this + "[/li]"
-                    }), this.insertText("[ul]\n" + n + "\n[/ul]")
+                        n += (n ? "\n" : "") + "[item]" + this + "[/item]"
+                    }), this.insertText("[blist]\n" + n + "\n[/blist]")
                 }
             },
             orderedlist: {
                 txtExec: function(t, e) {
                     var n = "";
                     s(e.split(/\r?\n/), function() {
-                        n += (n ? "\n" : "") + "[li]" + this + "[/li]"
-                    }), this.insertText("[ol]\n" + n + "\n[/ol]")
+                        n += (n ? "\n" : "") + "[item]" + this + "[/item]"
+                    }), this.insertText("[nlist]\n" + n + "\n[/nlist]")
                 }
             },
             table: {
@@ -103,7 +103,7 @@
                     var i = this;
                     l("image")._dropDown(i, t, e, function(t, e, n) {
                         var r = "";
-                        e && (r += " width=" + e), n && (r += " height=" + n), i.insertText("[img" + r + "]" + t + "[/img]")
+                        e && (r += " width=" + e), n && (r += " height=" + n), i.insertText("[img=" + t + "]")
                     })
                 }
             },
@@ -130,7 +130,7 @@
                 txtExec: function(t) {
                     var e = this;
                     l("youtube")._dropDown(e, t, function(t) {
-                        e.insertText("[youtube]" + t + "[/youtube]")
+                        e.insertText("[youtube=" + t + "]")
                     })
                 }
             },
@@ -256,7 +256,7 @@
                 breakStart: !0,
                 isInline: !1,
                 skipLastLineBreak: !0,
-                format: "[ul]{0}[/ul]",
+                format: "[blist]{0}[/blist]",
                 html: "<ul>{0}</ul>"
             },
             list: {
@@ -272,7 +272,7 @@
                 breakStart: !0,
                 isInline: !1,
                 skipLastLineBreak: !0,
-                format: "[ol]{0}[/ol]",
+                format: "[nlist]{0}[/nlist]",
                 html: "<ol>{0}</ol>"
             },
             li: {
@@ -281,7 +281,7 @@
                 },
                 isInline: !1,
                 closedBy: ["/ul", "/ol", "/list", "*", "li"],
-                format: "[li]{0}[/li]",
+                format: "[item]{0}[/item]",
                 html: "<li>{0}</li>"
             },
             "*": {
@@ -420,7 +420,7 @@
                     "text-align": ["left", "-webkit-left", "-moz-left", "-khtml-left"]
                 },
                 isInline: !1,
-                format: "[left]{0}[/left]",
+                format: "[l]{0}[/l]",
                 html: '<div align="left">{0}</div>'
             },
             center: {
@@ -428,7 +428,7 @@
                     "text-align": ["center", "-webkit-center", "-moz-center", "-khtml-center"]
                 },
                 isInline: !1,
-                format: "[center]{0}[/center]",
+                format: "[c]{0}[/c]",
                 html: '<div align="center">{0}</div>'
             },
             right: {
@@ -436,7 +436,7 @@
                     "text-align": ["right", "-webkit-right", "-moz-right", "-khtml-right"]
                 },
                 isInline: !1,
-                format: "[right]{0}[/right]",
+                format: "[r]{0}[/r]",
                 html: '<div align="right">{0}</div>'
             },
             justify: {
@@ -444,7 +444,7 @@
                     "text-align": ["justify", "-webkit-justify", "-moz-justify", "-khtml-justify"]
                 },
                 isInline: !1,
-                format: "[justify]{0}[/justify]",
+                format: "[j]{0}[/j]",
                 html: '<div align="justify">{0}</div>'
             },
             youtube: {
@@ -455,7 +455,7 @@
                     }
                 },
                 format: function(t, e) {
-                    return (t = g(t, "data-youtube-id")) ? "[youtube]" + t + "[/youtube]" : e
+                    return (t = g(t, "data-youtube-id")) ? "[youtube=" + t + "]" : e
                 },
                 html: '<iframe width="560" height="315" frameborder="0" src="https://www.youtube.com/embed/{0}?wmode=opaque" data-youtube-id="{0}" allowfullscreen></iframe>'
             },

@@ -1,0 +1,48 @@
+p{
+    margin: 0;
+}
+.table{
+    width: 1000px;
+    margin: 0 auto;
+}
+.header{
+    display: flex;
+    background-color: khaki;
+    padding: 0 20px 0 20px;
+}
+.header p{
+    width: 20%;
+    text-align: center;
+    padding: 0.4em;
+}
+.table-body{
+    height: auto;
+}
+.table-row{
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid grey;
+    margin: 0 20px 0 20px;
+    height: 150px;
+}
+.table-row:last-child{
+    border-bottom: none;
+}
+.table-row div{
+    text-align: center;
+    width: 20%;
+}
+.table-row .logo img{
+    max-height: 110px;
+}
+.rank{
+    width: 100%;
+}
+.kvadrat{
+    background-color: royalblue;
+    display: inline-block;
+    width: 30px;
+    padding: 5px;
+    border-radius: 10%;
+    color: white;
+}

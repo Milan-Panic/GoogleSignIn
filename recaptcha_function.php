@@ -51,6 +51,7 @@
         "/\[size\s*=\s*\"(\d+)\"\]/isU"                               => "<span style='font-size:$1px;'>",
         "/\[size\s*=\s*'(\d+)'\]/isU"                                 => "<span style='font-size:$1px;'>",
         "/\[size\s*=\s*(\d+)\]/isU"                                   => "<span style='font-size:$1px;'>",
+        "/\[size_e\s*=\s*(\d+)\]/isU"                                 => "<span style='font-size:$1&#48;px;'>",
 
         // FOREGROUND COLOR
 
@@ -178,6 +179,7 @@
 
         // LINE BREAKS
 
+        "/(\[hr\])/isU"                                         => "<hr />",
         "/(\r\n|\n|\r)/isU"                                     => "<br />",
 
         // REMOVE EXCESSIVE LINE BREAKS

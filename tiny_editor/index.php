@@ -4,9 +4,9 @@ include '../nav_menu.php';
 <script>
 tinymce.init({
     selector:'#tiny',
-    plugins: 'code bbcode',
+    plugins: 'code bbcode image',
     bbcode_dialect: 'punbb',
-    toolbar: 'code',
+    toolbar: 'code image',
     formats: {
     // Changes the default format for h1 to have a class of heading
     h1: { block: 'h1', classes: 'heading' }

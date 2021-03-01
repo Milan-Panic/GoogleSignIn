@@ -1,13 +1,11 @@
 <?php
-require_once('config.php');
-require_once('core/controller.Class.php');
-require_once('recaptcha_function.php');
+include 'nav_menu.php';
 $redirectTo = "http://".$_SERVER['SERVER_NAME']."/GoogleSignIn/callback.php";
 $data = ["email"];
 $fullURL = $handler -> getLoginUrl($redirectTo, $data);
 
 if(isset($_POST['submit2'])){
-    var_dump($_POST);
+    // var_dump($_POST);
 }
 
 if (isset($_GET['error']) && $_GET['error'] == 'not_human') {
@@ -31,10 +29,7 @@ if (isset($_POST['submit'])) {
     }
 }
 
-define('SITE_KEY', '6Le6wtgZAAAAAJNh5Nl8T87zHN81BhuF-6d30XiV');
-define('SECRET_KEY', '6Le6wtgZAAAAAFtxhSDjYoSVVQHMNGTISoS5A7fb');
 
-include 'nav_menu.php';
 ?>  
     <div class="container" >
         <?php if(isset($_COOKIE['id']) && isset($_COOKIE['sess'])){
@@ -80,16 +75,17 @@ include 'nav_menu.php';
             }, 100000);
         </script>
         <!-- RECAPTCHA -->
+        <a href="http://localhost/GoogleSignIn/table/table.html"><span class="table-link">Clik here to see table design</span></a>
         <h1>CKEditor</h1>
         <form action='' method='POST'>
             <div class="form-group">
                 <label for="textarea">Text Area</label>
                 <textarea class="form-control" name="example" id="SCEditor" cols="30" rows="10">
                     <?php 
-                    if(isset($_POST['example'])){
-                        // echo ForumCodeToHtml($_POST['example']);
-                        echo $_POST['example'];
-                    }
+                    // if(isset($_POST['example'])){
+                    //     echo ForumCodeToHtml($_POST['example']);
+                    //     echo $_POST['example'];
+                    // }
                     ?>
                 </textarea>
             </div>
@@ -146,11 +142,11 @@ include 'nav_menu.php';
         <a href="logout.php">Logout</a>
         </div>
         <?php }?>
-    </div>
-    <div>
-        <?php if(isset($_POST['example'])){
-            echo ForumCodeToHtml($_POST['example']);
-        } ?>
+        <div class="output">
+            <?php if(isset($_POST['example'])){
+                echo ForumCodeToHtml($_POST['example']);
+            } ?>
+        </div>
     </div>
 
     

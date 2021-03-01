@@ -10,6 +10,8 @@
 		<script src="./minified/sceditor.min.js"></script>
 		<script src="./minified/icons/monocons.js"></script>
 		<script src="./minified/formats/bbcode.js"></script>
+		<script src="./minified/plugins/dragdrop.js"></script>
+		<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 
 		<style>
 			html {
@@ -72,11 +74,87 @@ If you are using IE9+ or any non-IE browser just type [b]:[/b]) and it should be
 
 
 		<script>
+			/**
+			 * Takes a file and uploads it to imgur.
+			 * 
+			 * @param {File} file
+			 * @return {Promise}
+			 */
+			function imgurUpload(file) {
+				// var headers = new Headers({
+				// 	'authorization': 'Client-ID <your imgur client ID>'
+				// });
+
+				var form = new FormData();
+				form.append('image', file);
+
+				var url_from_php = 'nista';
+				$.ajax({  
+					url:"upload.php",  
+					method:"POST",  
+					data:form,  
+					contentType:false,  
+					cache: false,  
+					processData: false,  
+					success:function(data){  
+						// $('#uploaded_file').html(data);
+						url_from_php = data; //data.NESTO TIPA URL
+						
+					}  
+				})
+
+				let myPromise = new Promise(function(myResolve, myReject) {
+					let x = 0;
+					if (x == 0) {
+						// myResolve('https://scontent.fbeg4-1.fna.fbcdn.net/v/t1.0-9/p843x403/131609360_3385968768192179_3528226929202596279_o.jpg?_nc_cat=102&ccb=2&_nc_sid=730e14&_nc_eui2=AeGyaa2Fxeu6D7qHzt2SZqvN5owV3oUu2rDmjBXehS7asAFrdUro7V7usqrMOUERUwU&_nc_ohc=M68H-aTvwsUAX-H4hIx&_nc_ht=scontent.fbeg4-1.fna&tp=6&oh=3660bf7d278fcd1b8639af41be19f688&oe=60011747'); // when successful
+						myResolve(console.log(url_from_php));
+					} else {
+						myReject(console.log('Error in url')); // when error
+					}
+				});
+				return myPromise;
+
+				// return fetch('https://api.imgur.com/3/image', {
+				// 	method: 'post',
+				// 	headers: headers,
+				// 	body: form
+				// }).then(function (response) {
+				// 	return response.json();
+				// }).then(function (result) {
+				// 	if (result.success) {
+				// 		return result.data.link;
+				// 	}
+
+				// 	throw 'Upload error';
+				// });
+			}
+			var dragdropOptions = {
+				// The allowed mime types that can be dropped on the editor
+				allowedTypes: ['image/jpeg', 'image/png'],
+				handleFile: function (file, createPlaceholder) {
+					var placeholder = createPlaceholder();
+
+					imgurUpload(file).then(function (url) {
+						// Replace the placeholder with the image HTML
+						placeholder.insert('<img src=\'' + url + '\' />');
+					}).catch(function () {
+						// Error so remove the placeholder
+						placeholder.cancel();
+
+						alert('Problem uploading image to imgur.');
+					});
+				}
+			};
 			var textarea = document.getElementById('example');
 			sceditor.create(textarea, {
+				plugins: 'dragdrop',
+				// Set the drag and drop plugin options
+				dragdrop: dragdropOptions,				
+				// Rest of SCEditor options
 				format: 'bbcode',
 				icons: 'monocons',
-				style: '../minified/themes/content/default.min.css'
+				autofocus: true,
+				style: 'themes/content/default.css'
 			});
 
 
